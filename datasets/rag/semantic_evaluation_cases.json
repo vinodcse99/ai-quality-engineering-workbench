@@ -1,0 +1,36 @@
+
+[
+  {
+    "case_id": "SEM-RAG-001",
+    "description": "Correct answer supported by enterprise HR policy",
+    "question": "How many annual leave days does a full-time employee receive, and can unused leave be carried forward?",
+    "answer": "Full-time employees receive 25 days of annual leave. Unused leave can be carried forward according to the company's leave policy.",
+    "expected_answer": "Full-time employees receive 25 days of annual leave, and unused leave can be carried forward according to company policy.",
+    "retrieval_context": [
+      "The annual leave entitlement for eligible full-time employees is 25 working days per calendar year.",
+      "Unused annual leave may be carried forward in accordance with the company's annual leave policy and applicable limits."
+    ]
+  },
+  {
+    "case_id": "SEM-RAG-002",
+    "description": "Correct answer supported by expense reimbursement policy",
+    "question": "Within how many days must employees submit expense claims, and what documentation is required?",
+    "answer": "Employees must submit expense claims within 30 days and provide the relevant receipts.",
+    "expected_answer": "Employees must submit expense claims within 30 calendar days of the expense and attach the required supporting receipts.",
+    "retrieval_context": [
+      "Employees must submit business expense claims within 30 calendar days from the date the expense was incurred.",
+      "Original or digital receipts and supporting documentation must be attached to each expense claim."
+    ]
+  },
+  {
+    "case_id": "SEM-RAG-003",
+    "description": "Answer contains an unsupported reimbursement deadline",
+    "question": "What is the deadline for submitting an employee expense claim?",
+    "answer": "Employees must submit expense claims within 10 days of the expense.",
+    "expected_answer": "Employees must submit expense claims within 30 calendar days of the expense.",
+    "retrieval_context": [
+      "Employees must submit business expense claims within 30 calendar days from the date the expense was incurred.",
+      "Expense claims submitted after the permitted deadline may require additional approval."
+    ]
+  }
+]

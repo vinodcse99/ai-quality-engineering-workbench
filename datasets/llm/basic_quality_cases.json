@@ -1,0 +1,103 @@
+
+{
+  "project": "AI Quality Engineering Workbench",
+  "module": "LLM Response Quality",
+  "test_cases": [
+    {
+      "id": "LLM-001",
+      "description": "Correct annual leave answer",
+      "response": "Employees receive 25 days of annual leave.",
+      "required_terms": ["25 days"],
+      "forbidden_terms": ["35 days"],
+      "expected_pass": true
+    },
+    {
+      "id": "LLM-002",
+      "description": "Incorrect annual leave answer",
+      "response": "Employees receive 35 days of annual leave.",
+      "required_terms": ["25 days"],
+      "forbidden_terms": ["35 days"],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-003",
+      "description": "Empty AI response",
+      "response": "",
+      "required_terms": ["25 days"],
+      "forbidden_terms": [],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-004",
+      "description": "Irrelevant AI response",
+      "response": "The company provides medical insurance.",
+      "required_terms": ["25 days"],
+      "forbidden_terms": [],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-005",
+      "description": "Case insensitive answer validation",
+      "response": "EMPLOYEES RECEIVE 25 DAYS OF ANNUAL LEAVE.",
+      "required_terms": ["25 days"],
+      "forbidden_terms": ["35 days"],
+      "expected_pass": true
+    },
+    {
+      "id": "LLM-006",
+      "description": "Missing one required term",
+      "response": "Employees receive 25 days of annual leave.",
+      "required_terms": ["25 days", "paid leave"],
+      "forbidden_terms": [],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-007",
+      "description": "Forbidden information detected",
+      "response": "Employees receive 25 days of annual leave, not 35 days.",
+      "required_terms": ["25 days"],
+      "forbidden_terms": ["35 days"],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-008",
+      "description": "Multiple required terms present",
+      "response": "Employees receive 25 days of annual leave and 10 public holidays.",
+      "required_terms": ["25 days", "10 public holidays"],
+      "forbidden_terms": [],
+      "expected_pass": true
+    },
+    {
+      "id": "LLM-009",
+      "description": "Whitespace-only response",
+      "response": "   ",
+      "required_terms": ["25 days"],
+      "forbidden_terms": [],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-010",
+      "description": "Invalid null response",
+      "response": null,
+      "required_terms": ["25 days"],
+      "forbidden_terms": [],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-011",
+      "description": "Forbidden term detected case insensitively",
+      "response": "Employees receive 25 DAYS and 35 DAYS are not applicable.",
+      "required_terms": ["25 days"],
+      "forbidden_terms": ["35 days"],
+      "expected_pass": false
+    },
+    {
+      "id": "LLM-012",
+      "description": "Non-empty response without lexical constraints",
+      "response": "The company operates globally.",
+      "required_terms": [],
+      "forbidden_terms": [],
+      "expected_pass": true
+    }
+  ]
+}

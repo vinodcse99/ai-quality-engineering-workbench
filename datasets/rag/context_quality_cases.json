@@ -1,0 +1,35 @@
+
+[
+  {
+    "case_id": "CTX-001",
+    "description": "Partial context coverage with one unsupported answer claim",
+    "question": "How many annual leave days does the employee receive?",
+    "retrieved_contexts": [
+      "The employee receives 25 days of annual leave.",
+      "The company office is located in Hyderabad."
+    ],
+    "retrieved_context_ids": ["C1", "C2", "C3"],
+    "relevant_context_ids": ["C1", "C3"],
+    "required_facts": [
+      "25 days of annual leave",
+      "unused leave can be carried forward"
+    ],
+    "answer_claims": [
+      {
+        "claim": "The employee receives 25 days of annual leave.",
+        "required_evidence": ["25 days of annual leave"]
+      },
+      {
+        "claim": "Unused leave can be carried forward.",
+        "required_evidence": ["unused leave can be carried forward"]
+      }
+    ],
+    "expected": {
+      "context_scores": [0.5714, 0.0],
+      "average_context_relevance": 0.2857,
+      "context_precision": 0.8333,
+      "context_recall": 0.5,
+      "grounding_score": 0.5
+    }
+  }
+]

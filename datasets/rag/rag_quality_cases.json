@@ -1,0 +1,81 @@
+
+[
+  {
+    "case_id": "RAG-001",
+    "description": "All relevant documents retrieved",
+    "retrieved_document_ids": ["D1", "D2", "D3"],
+    "relevant_document_ids": ["D1", "D3"],
+    "expected": {
+      "precision_at_k": 0.6667,
+      "recall_at_k": 1.0,
+      "f1_at_k": 0.8,
+      "hit_rate_at_k": 1,
+      "mrr_at_k": 1.0
+    }
+  },
+  {
+    "case_id": "RAG-002",
+    "description": "No relevant documents retrieved",
+    "retrieved_document_ids": ["D4", "D5", "D6"],
+    "relevant_document_ids": ["D7", "D8"],
+    "expected": {
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1_at_k": 0.0,
+      "hit_rate_at_k": 0,
+      "mrr_at_k": 0.0
+    }
+  },
+  {
+    "case_id": "RAG-003",
+    "description": "Relevant documents ranked at the top",
+    "retrieved_document_ids": ["D2", "D1", "D3"],
+    "relevant_document_ids": ["D1", "D2"],
+    "expected": {
+      "precision_at_k": 0.6667,
+      "recall_at_k": 1.0,
+      "f1_at_k": 0.8,
+      "hit_rate_at_k": 1,
+      "mrr_at_k": 1.0
+    }
+  },
+  {
+    "case_id": "RAG-004",
+    "description": "Only one relevant document retrieved at rank two",
+    "retrieved_document_ids": ["D9", "D10"],
+    "relevant_document_ids": ["D10"],
+    "expected": {
+      "precision_at_k": 0.5,
+      "recall_at_k": 1.0,
+      "f1_at_k": 0.6667,
+      "hit_rate_at_k": 1,
+      "mrr_at_k": 0.5
+    }
+  },
+  {
+    "case_id": "RAG-005",
+    "description": "Relevant documents completely missed",
+    "retrieved_document_ids": ["D1", "D2"],
+    "relevant_document_ids": ["D3", "D4"],
+    "expected": {
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1_at_k": 0.0,
+      "hit_rate_at_k": 0,
+      "mrr_at_k": 0.0
+    }
+  },
+  {
+    "case_id": "RAG-006",
+    "description": "Partial retrieval with first relevant document at rank two",
+    "retrieved_document_ids": ["D1", "D2", "D3", "D4"],
+    "relevant_document_ids": ["D2", "D4", "D5"],
+    "expected": {
+      "precision_at_k": 0.5,
+      "recall_at_k": 0.6667,
+      "f1_at_k": 0.5714,
+      "hit_rate_at_k": 1,
+      "mrr_at_k": 0.5
+    }
+  }
+]
