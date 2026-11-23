@@ -1,0 +1,143 @@
+[
+  {
+    "case_id": "WF-001",
+    "description": "Complete a two-step employee workflow",
+    "role": "employee",
+    "stop_on_failure": true,
+    "steps": [
+      {
+        "tool": "search_employee_policy",
+        "arguments": {
+          "employee_id": "EMP-101",
+          "policy_type": "annual_leave"
+        }
+      },
+      {
+        "tool": "get_expense_status",
+        "arguments": {
+          "claim_id": "EXP-1001"
+        }
+      }
+    ],
+    "expected": {
+      "status": "completed",
+      "steps_executed": 2,
+      "successful_steps": 2,
+      "failed_steps": 0,
+      "execution_order": [
+        "search_employee_policy",
+        "get_expense_status"
+      ]
+    }
+  },
+  {
+    "case_id": "WF-002",
+    "description": "Stop workflow after an invalid expense submission",
+    "role": "employee",
+    "stop_on_failure": true,
+    "steps": [
+      {
+        "tool": "submit_expense_claim",
+        "arguments": {
+          "amount": 0,
+          "description": "Travel"
+        }
+      },
+      {
+        "tool": "get_expense_status",
+        "arguments": {
+          "claim_id": "EXP-1001"
+        }
+      }
+    ],
+    "expected": {
+      "status": "failed",
+      "steps_executed": 1,
+      "successful_steps": 0,
+      "failed_steps": 1,
+      "execution_order": [
+        "submit_expense_claim"
+      ],
+      "first_error_type": "ValueError"
+    }
+  },
+  {
+    "case_id": "WF-003",
+    "description": "Continue workflow after a failed step in recovery mode",
+    "role": "employee",
+    "stop_on_failure": false,
+    "steps": [
+      {
+        "tool": "submit_expense_claim",
+        "arguments": {
+          "amount": 0,
+          "description": "Travel"
+        }
+      },
+      {
+        "tool": "get_expense_status",
+        "arguments": {
+          "claim_id": "EXP-1001"
+        }
+      }
+    ],
+    "expected": {
+      "status": "partial",
+      "steps_executed": 2,
+      "successful_steps": 1,
+      "failed_steps": 1,
+      "execution_order": [
+        "submit_expense_claim",
+        "get_expense_status"
+      ],
+      "first_error_type": "ValueError"
+    }
+  },
+  {
+    "case_id": "WF-004",
+    "description": "Reject employee attempting administrator approval",
+    "role": "employee",
+    "stop_on_failure": true,
+    "steps": [
+      {
+        "tool": "approve_expense_claim",
+        "arguments": {
+          "claim_id": "EXP-1001"
+        }
+      }
+    ],
+    "expected": {
+      "status": "failed",
+      "steps_executed": 1,
+      "successful_steps": 0,
+      "failed_steps": 1,
+      "execution_order": [
+        "approve_expense_claim"
+      ],
+      "first_error_type": "PermissionError"
+    }
+  },
+  {
+    "case_id": "WF-005",
+    "description": "Allow administrator to approve an expense",
+    "role": "admin",
+    "stop_on_failure": true,
+    "steps": [
+      {
+        "tool": "approve_expense_claim",
+        "arguments": {
+          "claim_id": "EXP-1001"
+        }
+      }
+    ],
+    "expected": {
+      "status": "completed",
+      "steps_executed": 1,
+      "successful_steps": 1,
+      "failed_steps": 0,
+      "execution_order": [
+        "approve_expense_claim"
+      ]
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "case_id": "SEL-001",
+    "description": "Select employee policy search",
+    "intent": "policy_question",
+    "expected_tool": "search_employee_policy",
+    "expected_passed": true
+  },
+  {
+    "case_id": "SEL-002",
+    "description": "Select expense status lookup",
+    "intent": "expense_tracking",
+    "expected_tool": "get_expense_status",
+    "expected_passed": true
+  },
+  {
+    "case_id": "SEL-003",
+    "description": "Select expense submission",
+    "intent": "new_expense",
+    "expected_tool": "submit_expense_claim",
+    "expected_passed": true
+  },
+  {
+    "case_id": "SEL-004",
+    "description": "Select expense approval",
+    "intent": "expense_approval",
+    "expected_tool": "approve_expense_claim",
+    "expected_passed": true
+  },
+  {
+    "case_id": "SEL-005",
+    "description": "Detect incorrect expected tool",
+    "intent": "expense_tracking",
+    "expected_tool": "search_employee_policy",
+    "expected_passed": false
+  },
+  {
+    "case_id": "SEL-006",
+    "description": "Reject an unknown intent",
+    "intent": "unknown_intent",
+    "expected_error": "ValueError"
+  },
+  {
+    "case_id": "SEL-007",
+    "description": "Reject an intent mapped to an unregistered tool",
+    "intent": "delete_employee",
+    "mapping_tool": "delete_employee_record",
+    "expected_error": "KeyError"
+  }
+]

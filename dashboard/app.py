@@ -36,48 +36,105 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+/* Main dashboard theme */
 .stApp {
     background: #0b1220;
     color: #e5e7eb;
 }
+
 .block-container {
     padding-top: 2rem;
     padding-bottom: 3rem;
     max-width: 1500px;
 }
+
+/* Metric cards */
 [data-testid="stMetric"] {
     background: #141f33;
     border: 1px solid #293a56;
     border-radius: 12px;
     padding: 18px;
 }
+
 [data-testid="stMetricLabel"] {
     color: #a8b8d0;
 }
+
 [data-testid="stMetricValue"] {
     color: #ffffff;
 }
+
+/* Headings and sidebar */
 h1, h2, h3 {
     color: #f1f5f9;
 }
+
 section[data-testid="stSidebar"] {
     background: #101a2c;
 }
-.stButton button, .stDownloadButton button {
+
+/* Buttons */
+.stButton button,
+.stDownloadButton button {
     background: #176b87;
-    color: white;
+    color: #ffffff;
     border: 1px solid #318ba5;
     border-radius: 8px;
     font-weight: 600;
 }
-.stButton button:hover, .stDownloadButton button:hover {
+
+.stButton button:hover,
+.stDownloadButton button:hover {
     background: #12566e;
-    color: white;
+    color: #ffffff;
     border-color: #5ab5cc;
 }
+
+/* Dashboard tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 10px;
+    background: #111c2e;
+    padding: 10px;
+    border-radius: 12px;
+    border-bottom: 1px solid #334155;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: #24344c;
+    color: #cbd5e1;
+    border: 1px solid #40536e;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+}
+
+.stTabs [data-baseweb="tab"] p {
+    color: inherit;
+    font-weight: 600;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: #1e293b;
+    color: #ffffff;
+}
+
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    background: #176b87;
+    color: #ffffff;
+    border: 1px solid #5ab5cc;
+    border-bottom: 3px solid #38bdf8;
+}
+
+.stTabs [data-baseweb="tab"][aria-selected="true"] p {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Alerts and separators */
 div[data-testid="stAlert"] {
     border-radius: 10px;
 }
+
 hr {
     border-color: #293a56;
 }
@@ -241,7 +298,8 @@ def build_html_report(summary, modules, security_data, report_time):
             "<td>" + str(count) + "</td>"
             "<td class='pass'>" + str(counts["passed"]) + "</td>"
             "<td class='fail'>" + str(counts["failed"]) + "</td>"
-            "<td class='skip'>" + str(counts["skipped"]) + "</td></tr>"
+            "<td class='skip'>" + str(counts["skipped"]) + "</td>"
+            "<td>" + str(counts["other"]) + "</td></tr>"
         )
 
     security_score = find_value(security_data, "risk_score")
@@ -516,7 +574,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:26px 10p
 <section>
 <h2>4. Module Coverage and Results</h2>
 <p>The following module descriptions summarize the intended coverage areas. Counts are calculated from test records in the available pytest JSON report.</p>
-<table><thead><tr><th>Module</th><th>Coverage</th><th>Collected</th><th>Passed</th><th>Failed</th><th>Skipped</th></tr></thead>
+<table><thead><tr><th>Module and coverage</th><th>Collected</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Other</th></tr></thead>
 <tbody>__MODULE_ROWS__</tbody></table>
 </section>
 

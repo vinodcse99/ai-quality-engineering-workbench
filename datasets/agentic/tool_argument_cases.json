@@ -1,0 +1,67 @@
+[
+  {
+    "case_id": "ARG-001",
+    "description": "Valid expense status arguments",
+    "operation": "validate",
+    "tool": "get_expense_status",
+    "arguments": {
+      "claim_id": "EXP-1001"
+    },
+    "expected": {
+      "outcome": "accepted"
+    }
+  },
+  {
+    "case_id": "ARG-002",
+    "description": "Missing required claim identifier",
+    "operation": "validate",
+    "tool": "get_expense_status",
+    "arguments": {},
+    "expected": {
+      "outcome": "rejected",
+      "error_type": "ValueError"
+    }
+  },
+  {
+    "case_id": "ARG-003",
+    "description": "Arguments supplied as a list instead of a dictionary",
+    "operation": "validate",
+    "tool": "get_expense_status",
+    "arguments": [
+      "EXP-1001"
+    ],
+    "expected": {
+      "outcome": "rejected",
+      "error_type": "TypeError"
+    }
+  },
+  {
+    "case_id": "ARG-004",
+    "description": "Expense submission with a valid amount",
+    "operation": "execute",
+    "tool": "submit_expense_claim",
+    "arguments": {
+      "amount": 1500,
+      "description": "Business travel"
+    },
+    "role": "employee",
+    "expected": {
+      "outcome": "success"
+    }
+  },
+  {
+    "case_id": "ARG-005",
+    "description": "Expense submission with a zero amount",
+    "operation": "execute",
+    "tool": "submit_expense_claim",
+    "arguments": {
+      "amount": 0,
+      "description": "Business travel"
+    },
+    "role": "employee",
+    "expected": {
+      "outcome": "error",
+      "error_type": "ValueError"
+    }
+  }
+]
